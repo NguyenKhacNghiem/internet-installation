@@ -1,0 +1,269 @@
+{{!-- Form --}}
+<div class="row pt-3 px-3 mb-5">
+    <div class="col-6 mb-2">
+        <div class="form-outline" data-mdb-input-init>
+            <input name="id" type="text" id="id" class="form-control" />
+            <label class="form-label" for="id">Mã gói cước</label>
+        </div>
+    </div>
+
+    <div class="col-6 mb-2">
+        <div class="form-outline" data-mdb-input-init>
+            <input name="name" type="text" id="name" class="form-control" />
+            <label class="form-label" for="name">Tên gói cước</label>
+        </div>
+    </div>
+
+    <div class="col-6 mb-2">
+        <div class="form-outline" data-mdb-input-init>
+            <input name="upload_bandwidth" type="number" id="upload_bandwidth" class="form-control" min="0" />
+            <label class="form-label" for="upload_bandwidth">Băng thông upload (Mbps)</label>
+        </div>
+    </div>
+
+    <div class="col-6 mb-2">
+        <div class="form-outline" data-mdb-input-init>
+            <input name="download_bandwidth" type="number" id="download_bandwidth" class="form-control" min="0" />
+            <label class="form-label" for="download_bandwidth">Băng thông download (Mbps)</label>
+        </div>
+    </div>
+
+    <div class="col-6 mb-2">
+        <div class="form-outline" data-mdb-input-init>
+            <input name="price_per_month" type="number" id="price_per_month" class="form-control" min="0" />
+            <label class="form-label" for="price_per_month">Giá gói (1 tháng)</label>
+        </div>
+    </div>
+
+    <div class="col-6 mb-2">
+        <div class="form-outline" data-mdb-input-init>
+            <input name="install_fee" type="number" id="install_fee" class="form-control" min="0" />
+            <label class="form-label" for="install_fee">Phí lắp đặt</label>
+        </div>
+    </div>
+
+    <div class="col-6 mb-2">
+        <div class="form-outline" data-mdb-input-init>
+            <textarea name="description" class="form-control" id="description" rows="5"></textarea>
+            <label class="form-label" for="description">Mô tả</label>
+        </div>
+    </div>
+
+    <div class="col-6 mb-2">
+        <div class="form-check">
+            <input value="Cáp quang cá nhân" class="form-check-input" type="radio" name="category" id="category1" />
+            <label class="form-check-label" for="category1"> Cáp quang cá nhân </label>
+        </div>
+        <div class="form-check">
+            <input value="Cáp quang doanh nghiệp" class="form-check-input" type="radio" name="category"
+                id="category2" />
+            <label class="form-check-label" for="category2"> Cáp quang doanh nghiệp </label>
+        </div>
+        <div class="form-check">
+            <input value="Internet + Truyền hình" class="form-check-input" type="radio" name="category"
+                id="category3" />
+            <label class="form-check-label" for="category3"> Internet + Truyền hình </label>
+        </div>
+        <div class="form-check">
+            <input value="Ultra fast" class="form-check-input" type="radio" name="category" id="category4" />
+            <label class="form-check-label" for="category4"> Ultra fast </label>
+        </div>
+        <div class="form-check">
+            <input value="Gói LUX" class="form-check-input" type="radio" name="category" id="category5" />
+            <label class="form-check-label" for="category5"> Gói LUX </label>
+        </div>
+    </div>
+
+    <div class="input-group col-12 mb-2">
+        <input type="file" class="form-control" id="image" name="image" />
+        <button onclick="add()" class="btn btn-warning" data-mdb-ripple-init data-mdb-ripple-color="warning">
+            Thêm
+        </button>
+        <button onclick="reset()" class="btn btn-dark" data-mdb-ripple-init data-mdb-ripple-color="dark">
+            Hủy
+        </button>
+    </div>
+</div>
+
+{{!-- Table --}}
+<div class="p-3">
+    <table class="table align-middle mb-0 bg-white text-center">
+        <thead class="bg-light">
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Gói cước</th>
+                <th>Băng thông (Mbps)</th>
+                <th>Giá gói (1 tháng)</th>
+                <th>Phí lắp đặt</th>
+                <th>Mô tả</th>
+                <th>Loại gói</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+            <tr>
+                <td style="width: 10%;">
+                    <img src="/uploads/{{image}}" width="100%">
+                </td>
+                <td style="width: 10%;">
+                    {{name}} ({{upperCase id}})
+                </td>
+                <td style="width: 15%;">
+                    <span class="badge badge-success rounded-pill d-inline"><i class="fa-solid fa-cloud-arrow-up"></i>
+                        {{upload_bandwidth}} </span>
+                    <span class="badge badge-danger rounded-pill d-inline"><i class="fa-solid fa-cloud-arrow-down"></i>
+                        {{download_bandwidth}}</span>
+                </td>
+                <td style="width: 13%;">
+                    <span class="badge badge-warning rounded-pill d-inline"> {{formatPrice price_per_month}} </span>
+                </td>
+                <td style="width: 10%;">
+                    <span class="badge badge-dark rounded-pill d-inline"> {{formatPrice install_fee}} </span>
+                </td>
+                <td style="width: 20%;">
+                    {{description}}
+                </td>
+                <td style="width: 10%;">
+                    {{category}}
+                </td>
+                <td style="width: 12%;">
+                    <button data-mdb-modal-init data-mdb-target="#modal-update"
+                        onclick="showModalUpdate('{{id}}', '{{name}}', {{upload_bandwidth}}, {{download_bandwidth}}, {{price_per_month}}, {{install_fee}}, `{{description}}`, '{{category}}')"
+                        type="button" class="btn btn-link btn-sm btn-rounded">
+                        <i class="fa-solid fa-pen-to-square text-warning"></i>
+                    </button>
+                    <button onclick="showModalDelete('{{id}}')" data-mdb-modal-init data-mdb-target="#modal-delete" type="button" class="btn btn-link btn-sm btn-rounded">
+                        <i class="fa-solid fa-trash text-danger"></i>
+                    </button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Modal update --}}
+<div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title w-100" id="exampleModalLabel">Cập nhật thông tin gói cước</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 mb-2">
+                        <div class="form-outline" data-mdb-input-init>
+                            <input name="id-update" type="text" id="id-update" class="form-control" readonly/>
+                            <label class="form-label" for="id-update">Mã gói cước</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <div class="form-outline" data-mdb-input-init>
+                            <input name="name-update" type="text" id="name-update" class="form-control" />
+                            <label class="form-label" for="name-update">Tên gói cước</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <div class="form-outline" data-mdb-input-init>
+                            <input name="upload_bandwidth-update" type="number" id="upload_bandwidth-update" class="form-control"
+                                min="0" />
+                            <label class="form-label" for="upload_bandwidth-update">Băng thông upload (Mbps)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <div class="form-outline" data-mdb-input-init>
+                            <input name="download_bandwidth-update" type="number" id="download_bandwidth-update" class="form-control"
+                                min="0" />
+                            <label class="form-label" for="download_bandwidth-update">Băng thông download (Mbps)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <div class="form-outline" data-mdb-input-init>
+                            <input name="price_per_month-update" type="number" id="price_per_month-update" class="form-control"
+                                min="0" />
+                            <label class="form-label" for="price_per_month-update">Giá gói (1 tháng)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <div class="form-outline" data-mdb-input-init>
+                            <input name="install_fee-update" type="number" id="install_fee-update" class="form-control" min="0" />
+                            <label class="form-label" for="install_fee-update">Phí lắp đặt</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <div class="form-outline" data-mdb-input-init>
+                            <textarea name="description-update" class="form-control" id="description-update" rows="5"></textarea>
+                            <label class="form-label" for="description-update">Mô tả</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <div class="form-check">
+                            <input value="Cáp quang cá nhân" class="form-check-input" type="radio" name="category-update"
+                                id="category1-update" />
+                            <label class="form-check-label" for="category1-update"> Cáp quang cá nhân </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="Cáp quang doanh nghiệp" class="form-check-input" type="radio" name="category-update"
+                                id="category2-update" />
+                            <label class="form-check-label" for="category2-update"> Cáp quang doanh nghiệp </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="Internet + Truyền hình" class="form-check-input" type="radio" name="category-update"
+                                id="category3-update" />
+                            <label class="form-check-label" for="category3-update"> Internet + Truyền hình </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="Ultra fast" class="form-check-input" type="radio" name="category-update"
+                                id="category4-update" />
+                            <label class="form-check-label" for="category4-update"> Ultra fast </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="Gói LUX" class="form-check-input" type="radio" name="category-update"
+                                id="category5-update" />
+                            <label class="form-check-label" for="category5-update"> Gói LUX </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group col-12 mb-2">
+                        <input type="file" class="form-control" id="image-update" name="image-update" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="update()" type="button" class="btn btn-warning" data-mdb-ripple-init>Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal delete --}}
+<div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title w-100" id="exampleModalLabel2">Xác nhận</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Xác nhận xóa gói cước <b id="id-delete"></b>?</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="deleteProduct()" type="button" class="btn btn-warning" data-mdb-ripple-init>Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/manage-product.js"></script>
+<script src="/js/main.js"></script>

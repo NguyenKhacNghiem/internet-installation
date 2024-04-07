@@ -1,0 +1,36 @@
+<div class="container pt-5 mb-5">
+    <div class="m-auto w-75 border rounded px-5 py-4 shadow">
+        <h2>Hồ sơ khách hàng</h2>
+        <span class="text-danger fst-italic">Liên hệ FPT 1900 6600 để thay đổi số điện thoại đã lập hợp động.</span>
+
+        {{#with customer}}
+            <div class="form-outline mb-2" data-mdb-input-init>
+                <i class="fa-solid fa-phone trailing"></i>
+                <input value="{{phone}}" name="phone" type="text" id="phone" class="form-control form-icon-trailing" readonly />
+            </div>
+
+            <div class="form-outline mb-2" data-mdb-input-init>
+                <i class="fa-solid fa-user trailing"></i>
+                <input value="{{fullname}}" name="fullname" type="text" id="fullname" class="form-control form-icon-trailing" />
+                <label class="form-label" for="fullname">Họ tên</label>
+            </div>
+
+            <div class="form-outline mb-2" data-mdb-input-init>
+                <i class="fa-solid fa-location-dot trailing"></i>
+                <input value="{{address}}" name="address" type="text" id="address" class="form-control form-icon-trailing" />
+                <label class="form-label" for="address">Địa chỉ</label>
+            </div>
+
+            <div class="form-outline mb-2" data-mdb-input-init>
+                <i class="fa-solid fa-envelope trailing"></i>
+                <input value="{{email}}" name="email" type="text" id="email" class="form-control form-icon-trailing" />
+                <label class="form-label" for="email">Email</label>
+            </div>
+        {{/with}}
+
+        <button class="btn btn-warning btn-block mb-2" onclick="update()">Cập nhật</button>
+    </div>
+</div>
+
+<script src="/js/profile.js"></script>
+<script src="/js/main.js"></script>

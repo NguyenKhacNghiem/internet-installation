@@ -1,0 +1,28 @@
+<div class="container mb-5">
+    <table class="table align-middle bg-white text-center">
+        <thead class="bg-light">
+            <tr>
+                <th>Khách hàng</th>
+                <th>Gói cước</th>
+                <th>Ngày mua</th>
+                <th>Số tháng trả trước</th>
+                <th>Tổng tiền</th>
+                <th>Địa chỉ</th>
+                <th>Ghi chú</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders}}
+            <tr>
+                <td>{{phone}}</td>
+                <td><span class="badge badge-warning rounded-pill d-inline">{{upperCase id}}</span></td>
+                <td>{{date}}</td>
+                <td>{{number_of_month}} tháng</td>
+                <td>{{formatPrice total_price}}</td>
+                <td>{{address}}</td>
+                <td>{{note}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,52 @@
+<div class="row px-3">
+    {{#each products}}
+    <div class="card col-3 px-2 my-3">
+        <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+            <img data-mdb-modal-init data-mdb-target="#modal"
+                onclick="showModalDetail('{{id}}', '{{name}}', {{upload_bandwidth}}, {{download_bandwidth}}, {{price_per_month}}, {{install_fee}}, `{{description}}`, '{{category}}', '{{image}}')"
+                src="/uploads/{{image}}" class="img-fluid" height="200px" style="cursor: pointer;" />
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="card-text" style="height: 200px;">{{description}}</p>
+            <span><b>{{formatPrice price_per_month}}</b> /tháng</span>
+            <a href="/buy?id={{id}}" class="ms-1 btn btn-warning btn-rounded d-inline" data-mdb-ripple-init>Lắp đặt</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+{{!-- Modal chi tiết --}}
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title w-100" id="exampleModalLabel">Chi tiết gói cước</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <img id="image" src="" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 id="id-name" class="card-title">Mã + tên</h5>
+                        <b>Băng thông: </b> <p id="bandwidth" class="card-text d-inline"></p>
+                        <br>
+                        <b>Phí lắp đặt: </b> <p id="install-fee" class="card-text d-inline"></p>
+                        <br>
+                        <p id="description" class="card-text d-inline"></p>
+                        <br>
+                        <b>Loại gói: </b> <p id="category" class="card-text d-inline"></p>
+                        <h5 id="price-per-month" class="card-text text-warning"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="buy" href="#" class="btn btn-warning btn-rounded" data-mdb-ripple-init>Lắp đặt</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/index.js"></script>

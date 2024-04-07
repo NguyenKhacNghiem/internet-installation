@@ -1,0 +1,91 @@
+<div class="container py-3">
+    {{#with product}}
+    <div class="w-75 m-auto py-4 px-3 rounded shadow-5-strong mb-5">
+        <h5><i class="fa-solid fa-border-all text-warning"></i> Chọn gói dịch vụ</h5>
+        <input type="hidden" id="id" name="id" value="{{id}}">
+        <div class="row mb-3">
+            <div class="col-8">
+                <b>{{name}} - <span>14 tháng</span></b>
+            </div>
+            <div class="col-3">
+                <b class="text-warning">{{mulBy12 price_per_month}}</b>
+            </div>
+            <div class="col-1">
+                <input class="form-check-input" type="radio" name="price-per-month" id="price-per-month14" value="{{mulBy12 price_per_month}}"  />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-8">
+                <b>{{name}} - <span>7 tháng</span></b>
+            </div>
+            <div class="col-3">
+                <b class="text-warning">{{mulBy6 price_per_month}}</b>
+            </div>
+            <div class="col-1">
+                <input class="form-check-input" type="radio" name="price-per-month" id="price-per-month7" value="{{mulBy6 price_per_month}}"  />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-8">
+                <b>{{name}} - <span>3 tháng</span></b>
+            </div>
+            <div class="col-3">
+                <b class="text-warning">{{mulBy3 price_per_month}}</b>
+            </div>
+            <div class="col-1">
+                <input class="form-check-input" type="radio" name="price-per-month" id="price-per-month3" value="{{mulBy3 price_per_month}}"  />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-8">
+                <b>{{name}} - <span>Đóng hàng tháng</span></b>
+            </div>
+            <div class="col-3">
+                <b class="text-warning">{{formatPrice price_per_month}}</b>
+            </div>
+            <div class="col-1">
+                <input class="form-check-input" type="radio" name="price-per-month" id="price-per-month1" value="{{formatPrice price_per_month}}"  />
+            </div>
+        </div>
+
+        <h5><i class="fa-solid fa-border-all text-warning"></i> Phí dịch vụ</h5>
+        <div class="row">
+            <div class="col-8">
+                <b>Phí lắp đặt</b>
+            </div>
+            <div class="col-3">
+                <b class="text-warning">{{formatPrice install_fee}}</b>
+            </div>
+            <div class="col-1">
+                <input class="form-check-input" type="checkbox" name="install-fee" id="install-fee" value="{{formatPrice install_fee}}" checked disabled/>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-75 m-auto py-4 px-3 rounded shadow-5-strong">
+        <h5><i class="fa-solid fa-circle-info text-warning"></i> Thông tin cá nhân</h5>
+        <div class="form-outline mb-3" data-mdb-input-init>
+            <input name="fullname" type="text" id="fullname" class="form-control" />
+            <label class="form-label" for="fullname">Họ và tên</label>
+        </div>
+        <div class="form-outline mb-3" data-mdb-input-init>
+            <input name="phone" type="text" id="phone" class="form-control" />
+            <label class="form-label" for="phone">Số điện thoại</label>
+        </div>
+        <div class="form-outline mb-3" data-mdb-input-init>
+            <input name="address" type="text" id="address" class="form-control" />
+            <label class="form-label" for="address">Địa chỉ</label>
+        </div>
+        <div class="form-outline mb-3" data-mdb-input-init>
+            <textarea name="note" class="form-control" id="note" rows="3"></textarea>
+            <label class="form-label" for="note">Ghi chú</label>
+        </div>
+        <p>Tổng tiền: <b class="text-danger" id="total-price">{{formatPrice install_fee}}</b></p>
+        <button class="btn btn-outline-warning" onclick="back()">Quay lại</button>
+        <button class="btn btn-warning" onclick="buy()">Gửi yêu cầu lắp đặt</button>
+    </div>
+    {{/with}}
+</div>
+
+<script src="/js/buy.js"></script>
+<script src="/js/main.js"></script>
